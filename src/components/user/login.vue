@@ -5,7 +5,7 @@
         <el-input v-model="form.name">请输入用户名</el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="form.pass">请输入密码</el-input>
+        <el-input v-model="form.pass" show-password>请输入密码</el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">立即登陆</el-button>
@@ -33,16 +33,20 @@ export default {
       console.log(
           "login: username: " + this.form.name + " password: " + this.form.pass
       );
-      let user = this.$db.get('user').find({name: this.form.name}).value()
+      let user = this.$db.get('users').find({name: this.form.name}).value()
       if (!user) {
         alert("没有这个用户")
       } else {
-        this.$router.push("main");
-        let size = remote.screen.getPrimaryDisplay().workAreaSize;
-        let width = parseInt(size.width * 0.6);
-        let height = parseInt(size.height * 0.7);
-        remote.getCurrentWindow().setSize(width, height);
-        console.log(user)
+        if (user.pass === this.form.pass) {
+          this.$router.push("main")
+          let size = remote.screen.getPrimaryDisplay().workAreaSize
+          let width = parseInt(0.6 * size.width)
+          let height = parseInt(0.7 * size.height)
+          remote.getCurrentWindow().setSize(width, height)
+          console.log(user)
+        } else {
+          alert('密码错误，请重新输入')
+        }
       }
     },
     goRegister: function () {

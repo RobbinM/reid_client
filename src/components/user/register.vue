@@ -5,10 +5,10 @@
         <el-input v-model='form.name'>请输入用户名</el-input>
       </el-form-item>
       <el-form-item label='密码'>
-        <el-input v-model='form.pass'></el-input>
+        <el-input v-model='form.pass' show-password></el-input>
       </el-form-item>
       <el-form-item label='重复密码'>
-        <el-input v-model='form.pass_again'></el-input>
+        <el-input v-model='form.pass_again' show-password></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type='primary' @click='onSubmit'>立即注册</el-button>
@@ -20,7 +20,7 @@
 
 <script>
 
-let {remote} = require("electron");
+let {remote} = require("electron")
 
 export default {
   name: 'register',
@@ -37,10 +37,10 @@ export default {
     onSubmit: function () {
       if (this.form.pass === this.form.pass_again) {
         console.log('register: username: ' + this.form.name + ' password: ' + this.form.pass)
-        this.$db.set('user', {
-          name: this.form.name,
-          pass: this.form.pass
-        }).write()
+        this.$db.defaults({users: []}).write()
+        this.$db.get('users')
+            .push({name: this.form.name, pass: this.form.pass})
+            .write()
         this.$router.push('main')
         let size = remote.screen.getPrimaryDisplay().workAreaSize;
         let width = parseInt(size.width * 0.6);

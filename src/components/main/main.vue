@@ -47,19 +47,17 @@ export default {
   },
   methods: {
     executeData: function () {
-      let user = this.$db.get('user').find({name: 'shift114'}).value()
-      console.log(user)
-      // if (this.$store.getters.getSetFlag && this.$store.getters.getTargetFlag) {
-      //   for (let i = 1; i <= 16; ++i) {
-      //     this.outputImg.push({
-      //       id: i,
-      //       src: this.$imgSrc('internal_output/internal_output_' + i + '.jpg')
-      //     })
-      //   }
-      //   console.log(this.outputImg[0])
-      // } else {
-      //   this.dialogVisible = true
-      // }
+      if (this.$store.getters.getSetFlag && this.$store.getters.getTargetFlag) {
+        for (let i = 1; i <= 16; ++i) {
+          this.outputImg.push({
+            id: i,
+            src: this.$imgSrc('internal_output/internal_output_' + i + '.jpg')
+          })
+        }
+        console.log(this.outputImg[0])
+      } else {
+        this.dialogVisible = true
+      }
     }
   }
 };

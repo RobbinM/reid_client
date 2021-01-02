@@ -23,7 +23,7 @@
     <p>选择要检索的行人对象</p>
     <el-form-item class="target_background">
       <div class="drop_area" @click="chooseTarget">
-        <p v-if="!showTarget">拖入或点击选择要检索的行人对象图像</p>
+        <p v-if="!showTarget" class="targetText">拖入或点击选择要检索的行人对象图像</p>
         <img :src="$imgSrc('internal_target/internal_target_1.jpg')" alt="" v-if="showTarget" class="target">
       </div>
     </el-form-item>
@@ -72,7 +72,7 @@ export default {
     },
     chooseDataset: function () {
       if (this.chooseOption === "option 1") {
-        this.datasetPath = "test path";
+        this.datasetPath = "./assets/internal_sample";
         this.$store.commit('setSetFlag', true)
       } else if (this.chooseOption === "option 2") {
         this.dialogText = "模型训练还未完成"
@@ -121,6 +121,9 @@ export default {
   overflow-y: auto;
   text-align: center;
   margin: 0;
+}
+.targetText {
+  padding-top: 40%;
 }
 
 .target {
