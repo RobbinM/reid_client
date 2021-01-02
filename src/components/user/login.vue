@@ -39,9 +39,9 @@ export default {
       } else {
         if (user.pass === this.form.pass) {
           this.$router.push("main")
-          let size = remote.screen.getPrimaryDisplay().workAreaSize
-          let width = parseInt(0.6 * size.width)
-          let height = parseInt(0.7 * size.height)
+          // let size = remote.screen.getPrimaryDisplay().workAreaSize
+          let width = parseInt('1000')
+          let height = parseInt('650')
           remote.getCurrentWindow().setSize(width, height)
           console.log(user)
         } else {
